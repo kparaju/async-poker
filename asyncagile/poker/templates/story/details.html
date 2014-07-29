@@ -1,11 +1,54 @@
 {% extends "base.html" %}
+{% load gravatar %}
 
 {% block content %}
-<h1>Story: {{story.title}}</h1>
+<ol class="breadcrumb">
+  <li><a href="{%url 'project-details' story.project.pk %}">{{story.project.name}}</a></li>
+  <li class="active">{{story.title}}</li>
+</ol>
 
-<p>
-    {{story.description}}
-</p>
+<div>
+    <h1>{{story.title}}</h1>
 
-<small>Project: {{story.project}}</small>
+    <p class="lead">
+        {{story.description}}
+    </p>
+
+    <br>
+
+    <h2>Estimated By</h2>
+    <div>
+        {% for estimate in story.estimate_set.all %}
+            <img src="{% gravatar_url estimate.user.email 80 %}" class="img-circle" alt="{{estimate.user.first_name}} {{estimate.user.last_name}}">
+        {% empty %}
+        <i>Be the first one to estimate this story</i>
+        {% endfor %}
+    </div>
+
+    <h2>Estimations</h2>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Points</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for estimate in story.estimate_set.all %}
+            <tr>
+                <td>{{estimate.user.first_name}} {{estimate.user.last_name}}</td>
+                <td>{{estimate.points}}</td>
+                <td>{{estimate.comment}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+    <hr>
+
+    <a href="{% url 'estimate-new' story.pk %}" class="btn btn-primary">Estimate</a>
+
+</div>
 {% endblock %}

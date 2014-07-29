@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{%url 'project-details' story.project.pk %}">{{story.project.name}}</a></li>
+  <li><a href="{%url 'story-details' story.pk %}">{{story.title}}</a></li>
+  <li class="active">Estimate</li>
+</ol>
+
+<div>
+    <h1>{{story.title}}</h1>
+
+    <p class="lead">
+        {{story.description}}
+    </p>
+
+    <h2>Estimate</h2>
+    <div>
+        <a href="#" class="btn btn-default btn-lg" role="button">1</a>
+        <a href="#" class="btn btn-default btn-lg" role="button">2</a>
+        <a href="#" class="btn btn-default btn-lg" role="button">3</a>
+        <a href="#" class="btn btn-default btn-lg" role="button">5</a>
+        <a href="#" class="btn btn-default btn-lg" role="button">8</a>
+        <a href="#" class="btn btn-default btn-lg" role="button">13</a>
+        <a href="#" class="btn btn-default btn-lg" role="button">20</a>
+        <a href="#" class="btn btn-default btn-lg" role="button">40</a>
+        <a href="#" class="btn btn-default btn-lg" role="button">100</a>
+        <a href="#" class="btn btn-default btn-lg" role="button">?</a>
+        <a href="#" class="btn btn-default btn-lg" role="button"><i class="fa fa-coffee"></i></a>
+    </div>
+</div>
+{% endblock %}

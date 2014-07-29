@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load gravatar %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li class="active">{{project.name}}</li>
+</ol>
+<div>
+    <h1>Project: {{project.name}}</h1>
+
+    <h2>Members</h2>
+    <div>
+        {% for member in project.members.all %}
+            <img src="{% gravatar_url member.email 80 %}" class="img-circle" alt="{{member.first_name}} {{member.last_name}}">
+        {% empty %}
+            <i>This project has no members</i>
+        {% endfor %}
+    </div>
+
+    <h2>Active Stories</h2>
+    <div>
+        {% for story in project.story_set.all %}
+            <p class="lead"><a href="{% url 'story-details' story.pk %}">{{story.title}}</a></p>
+        {% empty %}
+            <i>This project has no stories</i>
+        {% endfor %}
+    </div>
+
+
+</div>
+{% endblock %}
