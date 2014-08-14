@@ -1,0 +1,5 @@
+{% for user in users %}
+    {% include "user/user.html" with user=user only %}
+{% empty %}
+    <i>No users yet!</i>
+{% endfor %}

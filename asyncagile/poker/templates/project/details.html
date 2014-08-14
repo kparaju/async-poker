@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load gravatar %}
 
 {% block content %}
 <ol class="breadcrumb">
@@ -10,11 +9,7 @@
 
     <h2>Members</h2>
     <div>
-        {% for member in project.members.all %}
-            <img src="{% gravatar_url member.email 80 %}" class="img-circle" alt="{{member.first_name}} {{member.last_name}}">
-        {% empty %}
-            <i>This project has no members</i>
-        {% endfor %}
+        {% include "user/user-list.html" with users=project.members.all only %}
     </div>
 
     <h2>Active Stories</h2>

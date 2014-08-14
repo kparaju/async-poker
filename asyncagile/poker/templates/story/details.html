@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load gravatar %}
 
 {% block content %}
 <ol class="breadcrumb">
@@ -18,11 +17,7 @@
 
     <h2>Estimated By</h2>
     <div>
-        {% for estimate in story.estimate_set.all %}
-            <img src="{% gravatar_url estimate.user.email 80 %}" class="img-circle" alt="{{estimate.user.first_name}} {{estimate.user.last_name}}">
-        {% empty %}
-        <i>Be the first one to estimate this story</i>
-        {% endfor %}
+        {% include "user/user-list.html" with users=story.get_estimated_by only %}
     </div>
 
     <h2>Estimations</h2>

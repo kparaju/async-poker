@@ -18,6 +18,9 @@ class Story(models.Model):
     created_at  = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    def get_estimated_by(self):
+        return [e.user for e in self.estimate_set.all()]
+
     def __unicode__(self):
         return self.title
 
